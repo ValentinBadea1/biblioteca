@@ -9,6 +9,7 @@ import com.example.biblioteca.utilizatori.api.dto.LoginReceivedDto;
 import com.example.biblioteca.utilizatori.api.dto.UserDto;
 import com.example.biblioteca.utilizatori.domain.Utilizator;
 import com.example.biblioteca.utilizatori.domain.UtilizatorRepository;
+import io.github.pixee.security.Filenames;
 import io.minio.DownloadObjectArgs;
 import io.minio.MinioClient;
 import io.minio.UploadObjectArgs;
@@ -94,7 +95,7 @@ public class UserCommandController {
             @RequestBody MultipartFile file
     ) {
 
-        String[] parts = file.getOriginalFilename().split("\\.");
+        String[] parts = Filenames.toSimpleFileName(file.getOriginalFilename()).split("\\.");
 
         String type = parts[parts.length - 1];
 

@@ -16,6 +16,7 @@ import com.example.biblioteca.edituri.domain.Editura;
 import com.example.biblioteca.edituri.domain.EdituraRepository;
 import com.example.biblioteca.imprumuturi.domain.ImprumuturiRepository;
 import com.example.biblioteca.utilizatori.domain.Utilizator;
+import io.github.pixee.security.Filenames;
 import io.minio.DownloadObjectArgs;
 import io.minio.MinioClient;
 import io.minio.UploadObjectArgs;
@@ -145,7 +146,7 @@ public class CarteOnlineCommandController {
             @RequestBody MultipartFile file
     ) {
 
-        String[] parts = file.getOriginalFilename().split("\\.");
+        String[] parts = Filenames.toSimpleFileName(file.getOriginalFilename()).split("\\.");
 
         String type = parts[parts.length - 1];
 
